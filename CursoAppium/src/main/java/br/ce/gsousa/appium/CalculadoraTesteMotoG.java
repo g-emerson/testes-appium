@@ -14,27 +14,26 @@ import io.appium.java_client.android.AndroidDriver;
 public class CalculadoraTesteMotoG {
 	
 	@Test
-	public  void deveSomarDoisValores() throws MalformedURLException {
+	public  void deveSomarDoisValoress() throws MalformedURLException {
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 	    desiredCapabilities.setCapability("platformName", "Android");
-	    desiredCapabilities.setCapability("deviceName", "emulator-5554");
+	    desiredCapabilities.setCapability("deviceName", "0030260344");
 	    desiredCapabilities.setCapability("automationName", "uiautomator2");
-	    desiredCapabilities.setCapability("appPackage", "com.android.calculator2");
+	    desiredCapabilities.setCapability("appPackage", "com.google.android.calculator");
 	    desiredCapabilities.setCapability("appActivity", "com.android.calculator2.CalculatorGoogle");
 	    	    
 	    AndroidDriver<MobileElement> driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), desiredCapabilities);
-	    
-	    MobileElement el3 = (MobileElement) driver.findElementById("com.android.calculator2:id/digit_2");
+	    	    
+	    MobileElement el1 = (MobileElement) driver.findElementById("com.google.android.calculator:id/digit_4");
+	    el1.click();
+	    el1.click();
+	    MobileElement el2 = (MobileElement) driver.findElementByAccessibilityId("mais");
+	    el2.click();
+	    MobileElement el3 = (MobileElement) driver.findElementById("com.google.android.calculator:id/digit_4");
 	    el3.click();
-	    MobileElement el4 = (MobileElement) driver.findElementByAccessibilityId("plus");
-	    el4.click();
-	    MobileElement el5 = (MobileElement) driver.findElementById("com.android.calculator2:id/digit_2");
-	    el5.click();
-	    MobileElement el6 = (MobileElement) driver.findElementById("com.android.calculator2:id/result");
+	    MobileElement el4 = (MobileElement) driver.findElementById("com.google.android.calculator:id/result");
 	    
-	    //System.out.print(el6.getText());
-	    
-	    Assert.assertEquals("4", el6.getText());
+	    Assert.assertEquals("8", el4.getText());
 	    driver.quit();
 	}
 }
