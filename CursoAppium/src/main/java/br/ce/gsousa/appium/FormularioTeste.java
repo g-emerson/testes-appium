@@ -109,4 +109,54 @@ public class FormularioTeste {
 	  
 	    driver.quit();
 	}
+	
+	@Test
+	public  void devePrencherCadastroCompleto() throws MalformedURLException {
+		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+	    desiredCapabilities.setCapability("platformName", "Android");
+	    desiredCapabilities.setCapability("deviceName", "emulator-5554");
+	    desiredCapabilities.setCapability("automationName", "uiautomator2");
+	    desiredCapabilities.setCapability(MobileCapabilityType.APP, "D:\\Treinamento\\testes-appium\\CursoAppium\\src\\main\\resources\\CTAppium-1-1.apk");
+	    //desiredCapabilities.setCapability("appActivity", "com.android.calculator2.Calculator");
+	    	    
+	    AndroidDriver<MobileElement> driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), desiredCapabilities);
+	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	    
+	    //selecionar item formulario
+	    List<MobileElement> listaElementos = driver.findElements(By.className("android.widget.TextView"));
+	    listaElementos.get(1).click();
+	    
+	    //Preenche nome
+	   MobileElement campoNome =  driver.findElement(MobileBy.AccessibilityId("nome"));
+	    campoNome.sendKeys("Gerry");
+	    //seleciona combobox
+	   MobileElement combo=  driver.findElement(By.className("android.widget.Spinner"));
+	    combo.click();
+	    
+	    driver.findElement(By.xpath("//android.widget.CheckedTextView[@text='PS4']")).click();
+	    //maarca checkbox
+	    driver.findElement(MobileBy.AccessibilityId("check")).click();
+	    
+	    //arrasta switch
+	    driver.findElement(MobileBy.AccessibilityId("switch")).click();
+	    
+	    //clica no botao salvar android.widget.TextView
+	    driver.findElement(By.xpath("//android.widget.TextView[@text='SALVAR']")).click();
+	    
+	    //verifica cadastro nome console switch check box
+	   String nome =  driver.findElement(By.xpath("//android.widget.TextView[@text='Nome: Gerry']")).getText();
+	   String console = driver.findElement(By.xpath("//android.widget.TextView[@text='Console: ps4']")).getText();
+	   String switc = driver.findElement(By.xpath("//android.widget.TextView[@text='Switch: Off']")).getText();
+	   String checkbox = driver.findElement(By.xpath("//android.widget.TextView[@text='Checkbox: Marcado']")).getText();
+	    
+	    
+	    
+	Assert.assertEquals("Nome: Gerry", nome);
+	Assert.assertEquals("Console: ps4", console);
+	Assert.assertEquals("Switch: Off", switc);
+	Assert.assertEquals("Checkbox: Marcado", checkbox);
+	
+	
+	
+	}
 }
