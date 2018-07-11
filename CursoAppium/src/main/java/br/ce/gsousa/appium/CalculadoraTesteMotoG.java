@@ -22,7 +22,7 @@ public class CalculadoraTesteMotoG {
 	    desiredCapabilities.setCapability("appPackage", "com.google.android.calculator");
 	    desiredCapabilities.setCapability("appActivity", "com.android.calculator2.CalculatorGoogle");
 	    	    
-	    AndroidDriver<MobileElement> driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), desiredCapabilities);
+	    AndroidDriver<MobileElement> driver = new AndroidDriver<MobileElement>(new URL("http://localhost:4723/wd/hub"), desiredCapabilities);
 	    	    
 	    MobileElement el1 = (MobileElement) driver.findElementById("com.google.android.calculator:id/digit_4");
 	    el1.click();
