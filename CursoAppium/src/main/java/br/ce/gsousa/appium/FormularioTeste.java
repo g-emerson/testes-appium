@@ -123,40 +123,32 @@ public class FormularioTeste {
 	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	    
 	    //selecionar item formulario
-	    List<MobileElement> listaElementos = driver.findElements(By.className("android.widget.TextView"));
-	    listaElementos.get(1).click();
+	    driver.findElement(By.xpath("//*[@text='Formulário']")).click();
 	    
-	    //Preenche nome
-	   MobileElement campoNome =  driver.findElement(MobileBy.AccessibilityId("nome"));
-	    campoNome.sendKeys("Gerry");
-	    //seleciona combobox
-	   MobileElement combo=  driver.findElement(By.className("android.widget.Spinner"));
-	    combo.click();
-	    
-	    driver.findElement(By.xpath("//android.widget.CheckedTextView[@text='PS4']")).click();
-	    //maarca checkbox
-	    driver.findElement(MobileBy.AccessibilityId("check")).click();
-	    
-	    //arrasta switch
-	    driver.findElement(MobileBy.AccessibilityId("switch")).click();
-	    
+	    //Preenche nome, combo
+	    driver.findElement(By.className("android.widget.EditText")).sendKeys("Gerry");
+	    driver.findElement(By.className("android.widget.CheckBox")).click();
+	    driver.findElement(By.className("android.widget.Switch")).click();
+	    driver.findElement(By.className("android.widget.Spinner")).click();
+	  	driver.findElement(By.xpath("//android.widget.CheckedTextView[@text='PS4']")).click();
+	 	    
 	    //clica no botao salvar android.widget.TextView
-	    driver.findElement(By.xpath("//android.widget.TextView[@text='SALVAR']")).click();
+	    driver.findElement(By.xpath("//*[@text='SALVAR']")).click();
 	    
 	    //verifica cadastro nome console switch check box
-	   String nome =  driver.findElement(By.xpath("//android.widget.TextView[@text='Nome: Gerry']")).getText();
-	   String console = driver.findElement(By.xpath("//android.widget.TextView[@text='Console: ps4']")).getText();
-	   String switc = driver.findElement(By.xpath("//android.widget.TextView[@text='Switch: Off']")).getText();
-	   String checkbox = driver.findElement(By.xpath("//android.widget.TextView[@text='Checkbox: Marcado']")).getText();
+	   
+	    MobileElement nome =  driver.findElement(By.xpath("//android.widget.TextView[starts-with(@text,'Nome:')]"));
+	    Assert.assertEquals("Nome: Gerry", nome.getText());
 	    
+	    MobileElement console = driver.findElement(By.xpath("//android.widget.TextView[starts-with(@text,'Console:')]"));
+	    Assert.assertEquals("Console: ps4", console.getText());
 	    
+	    MobileElement switc = driver.findElement(By.xpath("//android.widget.TextView[starts-with(@text,'Switch:')]"));
+	    Assert.assertTrue(switc.getText().endsWith("Off"));
 	    
-	Assert.assertEquals("Nome: Gerry", nome);
-	Assert.assertEquals("Console: ps4", console);
-	Assert.assertEquals("Switch: Off", switc);
-	Assert.assertEquals("Checkbox: Marcado", checkbox);
-	
-	
-	
+	    MobileElement checkbox = driver.findElement(By.xpath("//android.widget.TextView[starts-with(@text,'Checkbox:')]"));
+	    Assert.assertTrue(checkbox.getText().endsWith("Marcado"));
+	    	
+	    driver.quit();
 	}
 }
