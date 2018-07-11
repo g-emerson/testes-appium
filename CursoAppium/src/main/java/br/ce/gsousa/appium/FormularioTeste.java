@@ -1,15 +1,14 @@
 package br.ce.gsousa.appium;
 
-import static org.junit.Assert.assertArrayEquals;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.Timeout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -18,25 +17,32 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 
-
 public class FormularioTeste {
 	
-	@Test
-	public  void devePreencherCampoTexto() throws MalformedURLException {
+	private AndroidDriver<MobileElement> driver ;
+	
+	@Before
+	public void inicializarAppium() throws MalformedURLException {
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 	    desiredCapabilities.setCapability("platformName", "Android");
 	    desiredCapabilities.setCapability("deviceName", "emulator-5554");
 	    desiredCapabilities.setCapability("automationName", "uiautomator2");
 	    desiredCapabilities.setCapability(MobileCapabilityType.APP, "D:\\Treinamento\\testes-appium\\CursoAppium\\src\\main\\resources\\CTAppium-1-1.apk");
-	    //desiredCapabilities.setCapability("appActivity", "com.android.calculator2.Calculator");
-	    	    
-	    AndroidDriver<MobileElement> driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), desiredCapabilities);
+	     	    
+	    driver = new AndroidDriver<MobileElement>(new URL("http://localhost:4723/wd/hub"), desiredCapabilities);
 	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	    
-	    //selecionar formulario
-	   List<MobileElement> elementosEncontrados = driver.findElements(By.className("android.widget.TextView"));
-	   elementosEncontrados.get(1).click();
-	   
+	  //selecionar item formulario
+	    driver.findElement(By.xpath("//*[@text='Formulário']")).click();	    
+	}
+	
+	@After
+	public void tearDown() {
+		driver.quit();
+	}	
+	
+	@Test
+	public  void devePreencherCampoTexto() throws MalformedURLException {
 	    //escrever nome
 	   MobileElement campoNome = driver.findElement(MobileBy.AccessibilityId("nome"));
 	    campoNome.sendKeys("Gerry");
@@ -44,25 +50,10 @@ public class FormularioTeste {
 	    //verificar nome escrito
 	    String texto = campoNome.getText();
 	    Assert.assertEquals("Gerry", texto);
-	  
-	    driver.quit();
 	}
 	
 	@Test
 	public  void deveInteragirComCombo() throws MalformedURLException {
-		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-	    desiredCapabilities.setCapability("platformName", "Android");
-	    desiredCapabilities.setCapability("deviceName", "emulator-5554");
-	    desiredCapabilities.setCapability("automationName", "uiautomator2");
-	    desiredCapabilities.setCapability(MobileCapabilityType.APP, "D:\\Treinamento\\testes-appium\\CursoAppium\\src\\main\\resources\\CTAppium-1-1.apk");
-	    //desiredCapabilities.setCapability("appActivity", "com.android.calculator2.Calculator");
-	    	    
-	    AndroidDriver<MobileElement> driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), desiredCapabilities);
-	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	    
-	    //selecionar formulario
-	    driver.findElement(By.xpath("//android.widget.TextView[@text='Formulário']")).click();
-	   
 	    //clicar no combo
 	    driver.findElement(MobileBy.AccessibilityId("console")).click();
 	   
@@ -74,25 +65,10 @@ public class FormularioTeste {
 	    
 	    //String texto = campoNome.getText();
 	    Assert.assertEquals("Nintendo Switch", texto);
-	  
-	    driver.quit();
 	}
 	
 	@Test
 	public  void deveInteragirComSwitchCheckBox() throws MalformedURLException {
-		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-	    desiredCapabilities.setCapability("platformName", "Android");
-	    desiredCapabilities.setCapability("deviceName", "emulator-5554");
-	    desiredCapabilities.setCapability("automationName", "uiautomator2");
-	    desiredCapabilities.setCapability(MobileCapabilityType.APP, "D:\\Treinamento\\testes-appium\\CursoAppium\\src\\main\\resources\\CTAppium-1-1.apk");
-	    //desiredCapabilities.setCapability("appActivity", "com.android.calculator2.Calculator");
-	    	    
-	    AndroidDriver<MobileElement> driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), desiredCapabilities);
-	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	    
-	    //selecionar formulario
-	    driver.findElement(By.xpath("//*[@text='Formulário']")).click();
-	   
 	   //verificar status dos elementos
 	   MobileElement check = driver.findElement(By.className("android.widget.CheckBox"));
 	   MobileElement switc = driver.findElement(MobileBy.AccessibilityId("switch"));
@@ -106,25 +82,10 @@ public class FormularioTeste {
 	    //verificar status alterados
 	   Assert.assertFalse(check.getAttribute("checked").equals("false"));
 	   Assert.assertFalse(switc.getAttribute("checked").equals("true"));
-	  
-	    driver.quit();
 	}
 	
 	@Test
 	public  void devePrencherCadastroCompleto() throws MalformedURLException {
-		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-	    desiredCapabilities.setCapability("platformName", "Android");
-	    desiredCapabilities.setCapability("deviceName", "emulator-5554");
-	    desiredCapabilities.setCapability("automationName", "uiautomator2");
-	    desiredCapabilities.setCapability(MobileCapabilityType.APP, "D:\\Treinamento\\testes-appium\\CursoAppium\\src\\main\\resources\\CTAppium-1-1.apk");
-	    //desiredCapabilities.setCapability("appActivity", "com.android.calculator2.Calculator");
-	    	    
-	    AndroidDriver<MobileElement> driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), desiredCapabilities);
-	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	    
-	    //selecionar item formulario
-	    driver.findElement(By.xpath("//*[@text='Formulário']")).click();
-	    
 	    //Preenche nome, combo
 	    driver.findElement(By.className("android.widget.EditText")).sendKeys("Gerry");
 	    driver.findElement(By.className("android.widget.CheckBox")).click();
@@ -148,7 +109,5 @@ public class FormularioTeste {
 	    
 	    MobileElement checkbox = driver.findElement(By.xpath("//android.widget.TextView[starts-with(@text,'Checkbox:')]"));
 	    Assert.assertTrue(checkbox.getText().endsWith("Marcado"));
-	    	
-	    driver.quit();
-	}
+		}
 }
