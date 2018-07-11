@@ -1,12 +1,12 @@
 package br.ce.gsousa.appium.page;
 
-import br.ce.gsousa.appium.core.DSL;
+import br.ce.gsousa.appium.core.BasePage;
 
-public class MenuPage {
+public class MenuPage extends BasePage{
 
-	private DSL dsl=  new DSL();
+	
 	
 	public void	 acessarFormulario() {
-	    dsl.clicarTexto("Formulário");
+	    clicarTexto("Formulário");
 	}
 }
