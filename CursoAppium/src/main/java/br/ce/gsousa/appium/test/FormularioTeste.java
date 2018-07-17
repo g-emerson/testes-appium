@@ -10,7 +10,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,7 +17,6 @@ import br.ce.gsousa.appium.core.BaseTest;
 import br.ce.gsousa.appium.core.DriverFactory;
 import br.ce.gsousa.appium.page.FormularioPage;
 import br.ce.gsousa.appium.page.MenuPage;
-import io.appium.java_client.functions.ExpectedCondition;
 
 public class FormularioTeste extends BaseTest{
 	private MenuPage menu = new MenuPage();
