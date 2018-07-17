@@ -2,20 +2,14 @@ package br.ce.gsousa.appium.core;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Rule;
 import org.junit.rules.TestName;
-import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-
-import io.appium.java_client.MobileElement;
-
-import static br.ce.gsousa.appium.core.DriverFactory.getDriver;
 
 public class BaseTest {
 
