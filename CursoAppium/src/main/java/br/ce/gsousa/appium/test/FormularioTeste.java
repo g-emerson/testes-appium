@@ -4,14 +4,21 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.net.MalformedURLException;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import br.ce.gsousa.appium.core.BaseTest;
+import br.ce.gsousa.appium.core.DriverFactory;
 import br.ce.gsousa.appium.page.FormularioPage;
 import br.ce.gsousa.appium.page.MenuPage;
+import io.appium.java_client.functions.ExpectedCondition;
 
 public class FormularioTeste extends BaseTest{
 	private MenuPage menu = new MenuPage();
@@ -52,7 +59,7 @@ public class FormularioTeste extends BaseTest{
 	}
 	
 	@Test
-	public  void deveRealizarrCadastro() throws MalformedURLException {
+	public  void deveRealizarCadastro() throws MalformedURLException {
 		page.escreverNome("Gerry");
 		page.clicarCheck();
 		page.clicarSwitch();
@@ -63,5 +70,19 @@ public class FormularioTeste extends BaseTest{
 	    assertEquals("Console: ps4", page.obterConsoleCadastrado());
 	    assertTrue(page.obterCheckCadastrado().endsWith("Off"));
 	    assertTrue(page.obterSwithCadastrado().endsWith("Marcado"));
+		}
+	
+	@Test
+	public  void deveRealizarCadastroDemorado() throws MalformedURLException {
+		page.escreverNome("Gerry");
+		DriverFactory.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		
+		page.salvarDemorado();
+		//esperar(3000);
+		
+		WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@text='Nome: Gerry']")));
+		
+	    assertEquals("Nome: Gerry", page.obterNomeCadastrato());
 		}
 }

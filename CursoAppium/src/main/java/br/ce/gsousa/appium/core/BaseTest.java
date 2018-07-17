@@ -35,4 +35,12 @@ public class BaseTest {
 			e.printStackTrace();
 		}
 	}
+	
+	public void esperar(long segundos) {
+		try {
+			Thread.sleep(segundos);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 }
