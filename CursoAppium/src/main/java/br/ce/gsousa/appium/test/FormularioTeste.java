@@ -17,6 +17,7 @@ import br.ce.gsousa.appium.core.BaseTest;
 import br.ce.gsousa.appium.core.DriverFactory;
 import br.ce.gsousa.appium.page.FormularioPage;
 import br.ce.gsousa.appium.page.MenuPage;
+import io.appium.java_client.MobileBy;
 
 public class FormularioTeste extends BaseTest {
 	private MenuPage menu = new MenuPage();
@@ -89,7 +90,16 @@ public class FormularioTeste extends BaseTest {
 		page.clicarTexto("OK");
 
 		Assert.assertTrue(page.existeElementoPorTexto("20/2/2000"));
-
 	}
 
+	@Test
+	public void deveMudarHora() {
+		page.clicarTexto("06:00");
+		page.clicar(MobileBy.AccessibilityId("10"));
+		page.clicar(MobileBy.AccessibilityId("40"));
+		page.clicarTexto("OK");
+
+		Assert.assertTrue(page.existeElementoPorTexto("10:40"));
+	}
+	
 }
