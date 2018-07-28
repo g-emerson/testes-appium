@@ -102,4 +102,12 @@ public class FormularioTeste extends BaseTest {
 		Assert.assertTrue(page.existeElementoPorTexto("10:40"));
 	}
 	
+	@Test
+	public void deveInteragirComSeekbar() {
+		page.clicarSeebar(0.65);
+
+		page.salvar();
+		assertEquals("Slider: 65", page.obterSliderCadastrado());
+		//Assert.assertTrue(page.existeElementoPorTexto("Slider: 65"));
+	}
 }

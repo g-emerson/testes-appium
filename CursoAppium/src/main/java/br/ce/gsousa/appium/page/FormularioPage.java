@@ -1,9 +1,12 @@
 package br.ce.gsousa.appium.page;
 
+import static br.ce.gsousa.appium.core.DriverFactory.getDriver;
+
 import org.openqa.selenium.By;
 
 import br.ce.gsousa.appium.core.BasePage;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 
 public class FormularioPage extends BasePage{
 
@@ -40,6 +43,17 @@ public class FormularioPage extends BasePage{
 		return isCheckMarcado(MobileBy.AccessibilityId("switch"));
 	}
 	
+	public void clicarSeebar(double posicao) {
+		int delta = 50;
+		MobileElement seek =  getDriver().findElement(MobileBy.AccessibilityId("slid"));
+		int y = seek.getLocation().y+ (seek.getSize().height/2);
+				
+		int xInicial = seek.getLocation().x+ delta;
+		int x = (int) (xInicial+ ((seek.getSize().width- 2*delta)* posicao));
+		
+		tap(x,y);		
+	}
+	
 	public void salvar() {
 		clicarTexto("SALVAR");		
 	}
@@ -64,6 +78,9 @@ public class FormularioPage extends BasePage{
 		return obterTexto(By.xpath("//android.widget.TextView[starts-with(@text,'Checkbox:')]"));
 	}
 	
+	public String obterSliderCadastrado() {
+		return obterTexto(By.xpath("//android.widget.TextView[starts-with(@text,'Slider:')]"));
+	}
 	
 	
 	
