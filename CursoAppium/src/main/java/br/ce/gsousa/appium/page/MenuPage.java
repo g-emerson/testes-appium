@@ -32,4 +32,8 @@ public class MenuPage extends BasePage{
 		clicarTexto("Swipe");
 	}
 
+	public void acessarSwipeList() {
+		clicarTexto("Swipe List");		
+	}
+
 }
