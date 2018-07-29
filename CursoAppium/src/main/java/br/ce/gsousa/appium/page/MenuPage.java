@@ -36,4 +36,7 @@ public class MenuPage extends BasePage{
 		clicarTexto("Swipe List");		
 	}
 
+	public void acessarDragNDrop() {
+		clicarTexto("Drag and drop");		
+	}
 }
