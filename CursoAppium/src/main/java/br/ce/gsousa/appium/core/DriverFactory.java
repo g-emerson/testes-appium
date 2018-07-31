@@ -30,7 +30,7 @@ public class DriverFactory {
 			DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 			desiredCapabilities.setCapability("platformName", "Android");
 			desiredCapabilities.setCapability("deviceName", "emulator-5554");
-			desiredCapabilities.setCapability("automationName", "uiautomator2");
+			//desiredCapabilities.setCapability("automationName", "uiAutomator2");
 			desiredCapabilities.setCapability(MobileCapabilityType.APP, apkCaminho);
 
 			try {
