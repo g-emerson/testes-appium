@@ -1,6 +1,4 @@
-package br.ce.gsousa.appium.page;
-
-import static br.ce.gsousa.appium.core.DriverFactory.getDriver;
+package br.ce.gsousa.appium.page.SeuBarriga;
 
 import org.openqa.selenium.By;
 
