@@ -13,4 +13,12 @@ public class SBContasPage extends BasePage {
 	public void salvar() {
 		clicarTexto("SALVAR");
 	}
+	
+	public void selecionarContas(String conta) {
+		cliqueLongo(By.xpath("//*[@text='"+conta+"']"));	
+	}
+	
+	public void excluir() {
+		clicarTexto("EXCLUIR");
+	}
 }
