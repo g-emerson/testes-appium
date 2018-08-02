@@ -9,6 +9,7 @@ import br.ce.gsousa.appium.page.MenuPage;
 import br.ce.gsousa.appium.page.SeuBarriga.SBContasPage;
 import br.ce.gsousa.appium.page.SeuBarriga.SBLoginPage;
 import br.ce.gsousa.appium.page.SeuBarriga.SBMenuPage;
+import br.ce.gsousa.appium.page.SeuBarriga.SBMovimentacaoPage;
 
 public class SBTeste extends BaseTest {
 
@@ -16,6 +17,7 @@ public class SBTeste extends BaseTest {
 	private SBLoginPage login = new SBLoginPage();
 	private SBMenuPage menuSb = new SBMenuPage();
 	private SBContasPage contasSb = new SBContasPage();
+	private SBMovimentacaoPage mov = new SBMovimentacaoPage();
 
 	@Before
 	public void setup() {
@@ -43,5 +45,34 @@ public class SBTeste extends BaseTest {
 		
 		Assert.assertTrue(contasSb.existeElementoPorTexto("Conta excluída com sucesso"));
 	}
+	
+	@Test
+	public void deveValidarInclusaoMov() {
+		menuSb.acessarMovimentacoes();
+		
+		mov.salvar();
+		Assert.assertTrue(contasSb.existeElementoPorTexto("Descrição é um campo obrigatório"));
+		
+		mov.setDescricao("Descri");
+		mov.salvar();
+		Assert.assertTrue(contasSb.existeElementoPorTexto("Interessado é um campo obrigatório"));
+		
+		mov.setInteressado("Interess");
+		mov.salvar();
+		Assert.assertTrue(contasSb.existeElementoPorTexto("Valor é um campo obrigatório"));
+		
+		mov.setValor("100");
+		mov.salvar();
+		Assert.assertTrue(contasSb.existeElementoPorTexto("Conta é um campo obrigatório"));
+		
+		mov.setConta("Conta para alterar");
+		mov.salvar();
+		Assert.assertTrue(contasSb.existeElementoPorTexto("Movimentação cadastrada com sucesso"));
+		
+		
+		
+	}
 
+	
+	//Descrição é um campo obrigatório
 }
