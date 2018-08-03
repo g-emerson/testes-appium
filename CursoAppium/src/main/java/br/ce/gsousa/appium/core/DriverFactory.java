@@ -18,7 +18,8 @@ public class DriverFactory {
 
 	public static AndroidDriver<MobileElement> getDriver() {
 		if (driver == null) {
-			createDrive();
+			// createDrive();
+			createTestObjectDrive();
 		}
 		return driver;
 	}
@@ -30,13 +31,12 @@ public class DriverFactory {
 			DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 			desiredCapabilities.setCapability("platformName", "Android");
 			desiredCapabilities.setCapability("deviceName", "emulator-5554");
-			//desiredCapabilities.setCapability("automationName", "uiAutomator2");
+			desiredCapabilities.setCapability("automationName", "uiAutomator2");
 			desiredCapabilities.setCapability(MobileCapabilityType.APP, apkCaminho);
 
 			try {
 				driver = new AndroidDriver<MobileElement>(new URL("http://localhost:4723/wd/hub"), desiredCapabilities);
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -45,6 +45,25 @@ public class DriverFactory {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+	}
+
+	private static void createTestObjectDrive() {
+		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+		desiredCapabilities.setCapability("platformName", "Android");
+		desiredCapabilities.setCapability("testobject_api_key", "B5B0F35D95494712997B4EA2A1DADC4A");
+		desiredCapabilities.setCapability("appiumVersion", "1.7.2");
+		desiredCapabilities.setCapability("language", "pt");
+		desiredCapabilities.setCapability("automationName", "uiAutomator2");
+
+		try {
+			driver = new AndroidDriver<MobileElement>(new URL("https://eu1.appium.testobject.com/wd/hub"),
+					desiredCapabilities);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
 	}
 
 	public static void killDriver() {
