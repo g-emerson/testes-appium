@@ -12,4 +12,11 @@ public class SBMenuPage extends BasePage {
 		clicarTexto("MOV...");
 	}
 	
+	public void acessarResumo() {
+		clicarTexto("RESUMO");
+	}
+	
+	public void acessarHome() {
+		clicarTexto("HOME");
+	}
 }

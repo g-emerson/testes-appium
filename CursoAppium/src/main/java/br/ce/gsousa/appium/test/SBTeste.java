@@ -7,9 +7,11 @@ import org.junit.Test;
 import br.ce.gsousa.appium.core.BaseTest;
 import br.ce.gsousa.appium.page.MenuPage;
 import br.ce.gsousa.appium.page.SeuBarriga.SBContasPage;
+import br.ce.gsousa.appium.page.SeuBarriga.SBHomePage;
 import br.ce.gsousa.appium.page.SeuBarriga.SBLoginPage;
 import br.ce.gsousa.appium.page.SeuBarriga.SBMenuPage;
 import br.ce.gsousa.appium.page.SeuBarriga.SBMovimentacaoPage;
+import br.ce.gsousa.appium.page.SeuBarriga.SBResumoPage;
 
 public class SBTeste extends BaseTest {
 
@@ -18,7 +20,8 @@ public class SBTeste extends BaseTest {
 	private SBMenuPage menuSb = new SBMenuPage();
 	private SBContasPage contasSb = new SBContasPage();
 	private SBMovimentacaoPage mov = new SBMovimentacaoPage();
-
+	private SBHomePage home = new SBHomePage();
+	private SBResumoPage resumo = new SBResumoPage();
 	@Before
 	public void setup() {
 		menu.acessaSBNativo();
@@ -67,10 +70,22 @@ public class SBTeste extends BaseTest {
 		
 		mov.setConta("Conta para alterar");
 		mov.salvar();
-		Assert.assertTrue(contasSb.existeElementoPorTexto("Movimentação cadastrada com sucesso"));
+		Assert.assertTrue(contasSb.existeElementoPorTexto("Movimentação cadastrada com sucesso"));		
+	}
+	
+	@Test
+	public void deveAtualizarSaldoAoExcluirMovimentacao() {
+		Assert.assertEquals("534.00", home.obterSaldoConta("Conta para saldo"));
 		
+		menuSb.acessarResumo();
+		esperar(1000);
+		resumo.excluirMovimetacao("Movimentacao 3, calculo saldo");
+		Assert.assertTrue(resumo.existeElementoPorTexto("Movimentação removida com sucesso!"));
+		menuSb.acessarHome();
 		
-		
+		esperar(1000);
+		home.scroll(0.2, 0.9);
+		Assert.assertEquals("-1000.00", home.obterSaldoConta("Conta para saldo"));
 	}
 
 	
